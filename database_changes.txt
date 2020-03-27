@@ -1,0 +1,65 @@
+ALTER TABLE `xin_leave_type` ADD `days_per_month` VARCHAR(200) NOT NULL AFTER `days_per_year`;
+
+ALTER TABLE `xin_salary_allowances` ADD `allowance_amount_type` TINYINT(2) NOT NULL DEFAULT '1' AFTER `allowance_title`, ADD `allowance_pr_amount` INT NULL DEFAULT NULL AFTER `allowance_amount_type`;
+
+ALTER TABLE `xin_employees` ADD `grade_id` INT NULL DEFAULT NULL AFTER `wages_type`;
+
+ALTER TABLE `xin_salary_allowances` ADD `grade_id` INT NULL DEFAULT NULL AFTER `employee_id`;
+
+ALTER TABLE `xin_salary_statutory_deductions` ADD `deduction_pr_amount` DOUBLE(10,2) NULL AFTER `deduction_amount_type`;
+
+ALTER TABLE `xin_salary_statutory_deductions` CHANGE `deduction_title` `deduction_amount_type` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+ALTER TABLE `xin_salary_statutory_deductions` ADD `grade_id` INT NULL DEFAULT NULL AFTER `employee_id`;
+
+ALTER TABLE `xin_salary_statutory_deductions` ADD `salary_type` INT NULL DEFAULT NULL AFTER `statutory_options`;
+
+ALTER TABLE `xin_hrsale_module_attributes` ADD `is_display` BOOLEAN NOT NULL DEFAULT FALSE AFTER `priority`;
+
+ALTER TABLE `xin_salary_statutory_deductions` CHANGE `deduction_pr_amount` `deduction_pr_amount` DOUBLE(8,2) NULL DEFAULT NULL, CHANGE `deduction_amount` `deduction_amount` DOUBLE(10,2) NULL DEFAULT NULL;
+
+ALTER TABLE `xin_salary_allowances` CHANGE `allowance_pr_amount` `allowance_pr_amount` DOUBLE(8,2) NULL DEFAULT NULL;
+
+ALTER TABLE `xin_salary_allowances` CHANGE `allowance_amount` `allowance_amount` DOUBLE(10,2) NULL DEFAULT NULL;
+
+//19-02-020
+
+ALTER TABLE `xin_salary_allowances` ADD `is_modify` TINYINT(1) NOT NULL DEFAULT '0' AFTER `allowance_amount`;
+
+ALTER TABLE `xin_salary_statutory_deductions` ADD `is_modify` TINYINT(1) NOT NULL DEFAULT '0' AFTER `deduction_amount`;
+
+//21-02-2020
+ALTER TABLE `xin_companies` ADD UNIQUE(`username`);
+
+
+//11-03-2020
+ALTER TABLE `xin_employee_resignations` CHANGE `notice_date` `start_date` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+ALTER TABLE `xin_employee_resignations` ADD `end_date` VARCHAR(255) NOT NULL AFTER `start_date`;
+
+//12-03-2020
+ALTER TABLE `xin_announcements` ADD `employee_id` VARCHAR(255) NOT NULL AFTER `company_id`;
+ALTER TABLE `xin_announcements` CHANGE `department_id` `department_id` INT(111) NOT NULL COMMENT '0 as all department';
+
+// 04-03-2020
+ALTER TABLE `xin_leave_type` ADD `is_carry_end_cash` TINYINT(1) NULL DEFAULT NULL AFTER `days_per_month`, ADD `is_paid_not` TINYINT(1) NOT NULL AFTER `is_carry_end_cash`;
+
+// 11-03-2020
+ALTER TABLE `xin_leave_applications` ADD `no_of_day` INT NOT NULL AFTER `to_date`;
+
+// 13-03-2020
+ALTER TABLE `xin_employees` ADD `biometric_id` INT NULL DEFAULT NULL AFTER `employee_id`, ADD UNIQUE (`biometric_id`);
+ALTER TABLE `xin_system_setting` ADD `is_active_biometric` VARCHAR(10) NOT NULL AFTER `is_active_sub_departments`;
+
+// 16-03-2020
+
+ALTER TABLE `xin_document_type` ADD `is_title` TINYINT(1) NOT NULL DEFAULT '0' AFTER `document_type`, ADD `is_address` TINYINT(1) NOT NULL DEFAULT '0' AFTER `is_title`, ADD `is_no` TINYINT(1) NOT NULL DEFAULT '0' AFTER `is_address`, ADD `is_create_date` TINYINT(1) NOT NULL DEFAULT '0' AFTER `is_no`, ADD `is_expiry_date` TINYINT(1) NOT NULL DEFAULT '0' AFTER `is_create_date`, ADD `is_notif_email` TINYINT(1) NOT NULL DEFAULT '0' AFTER `is_expiry_date`;
+ALTER TABLE `xin_employee_documents` CHANGE `date_of_expiry` `date_of_expiry` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL, CHANGE `title` `title` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL, CHANGE `notification_email` `notification_email` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL, CHANGE `is_alert` `is_alert` TINYINT(1) NULL DEFAULT NULL, CHANGE `description` `description` MEDIUMTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL, CHANGE `document_file` `document_file` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+// 17-03-2020 // Parth
+ALTER TABLE `xin_employee_documents` ADD `document_no` VARCHAR(50) NULL AFTER `document_type_id`, ADD `date_of_create` VARCHAR(255) NULL AFTER `document_no`;
+ALTER TABLE `xin_grade_benefit` CHANGE `salary_amount_type` `salary_amount_type` TINYINT(1) NULL DEFAULT '1';
+ALTER TABLE `xin_salary_allowances` ADD `allowance_salary_amount_type` TINYINT(1) NOT NULL DEFAULT '1' AFTER `allowance_pr_amount`;
+
+//17-03-2020 
+ALTER TABLE `xin_grade_benefit` ADD `salary_amount_type` INT NULL DEFAULT NULL AFTER `grade_amount_type`;
