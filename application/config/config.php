@@ -28,8 +28,6 @@ $hrsale_url .= "://".$_SERVER['HTTP_HOST'];
 $hrsale_url .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 $config['base_url'] = $hrsale_url;
 
-
-//$config['base_url'] = 'http://localhost/hrsale/';
 // change this url to your desired url.
 //NOTE: Put url like http://hr.yourdomain.com/ or http://yourdomain.com/hr/
 
